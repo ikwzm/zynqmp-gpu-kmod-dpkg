@@ -108,7 +108,7 @@ patching file linux/mali_osk_timers.c
 
 
 ```console
-shell$ sudo debian/rules ARCH=arm64 DEB_ARCH=arm64 KERNEL_RELEASE=4.19.0-xlnx-v2019.1-zynqmp-fpga KERNEL_SRC_DIR=~/work/ZynqMP-FPGA-Linux/linux-xlnx-v2019.1-zynqmp-fpga CROSS_COMPILE=aarch64-linux-gnu- binary
+shell$ sudo debian/rules ARCH=arm64 DEB_ARCH=arm64 KERNEL_RELEASE=4.19.0-xlnx-v2019.1-zynqmp-fpga KERNEL_SRC_DIR=~/work/ZynqMP-FPGA-Linux/linux-xlnx-v2019.1-zynqmp-fpga binary
     :
     :
     :

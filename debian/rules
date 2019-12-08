@@ -4,9 +4,22 @@
 package         = zynqmp-gpu
 KERNEL_RELEASE ?= $(shell uname -r)
 ARCH           ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
+HOST_ARCH      ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
 DEB_ARCH       ?= $(shell dpkg --print-architecture)
 BUILD_DIR      ?= DX910-SW-99002-r8p0-01rel0/driver/src/devicedrv/mali
 KERNEL_SRC_DIR ?= /lib/modules/$(KERNEL_RELEASE)/build
+
+ifeq ($(ARCH), arm)
+ ifneq ($(HOST_ARCH), arm)
+   CROSS_COMPILE  ?= arm-linux-gnueabihf-
+ endif
+endif
+ifeq ($(ARCH), arm64)
+ ifneq ($(HOST_ARCH), arm64)
+   CROSS_COMPILE  ?= aarch64-linux-gnu-
+ endif
+endif
+
 docdir          = debian/tmp/usr/share/doc/$(package)-$(KERNEL_RELEASE)
 make_option     = KDIR=$(KERNEL_SRC_DIR) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) BUILD=release MALI_PLATFORM=arm USING_DT=1 MALI_SHARED_INTERRUPTS=1 MALI_QUIET=1
 
