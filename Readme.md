@@ -73,7 +73,7 @@ Resolving deltas: 100% (6244/6244), done.
 ### Patch to DX910-SW-99002-r8p0-01rel0
 
 ```console
-shell$ for file in `\find meta-xilinx/meta-xilinx-bsp/recipes-graphics/mali/kernel-module-mali -maxdepth 1 -type f`; do patch -d DX910-SW-99002-r8p0-01rel0/driver/src/devicedrv/mali/ -p1 < $file ; done
+shell$ for file in `\find meta-xilinx/meta-xilinx-bsp/recipes-graphics/mali/kernel-module-mali -maxdepth 1 -type f | sort`; do patch -d DX910-SW-99002-r8p0-01rel0/driver/src/devicedrv/mali/ -p1 < $file ; done
 patching file Makefile
 patching file platform/arm/arm.c
 patching file linux/mali_linux_trace.h
