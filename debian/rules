@@ -1,0 +1,45 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+package         = zynqmp-gpu
+KERNEL_RELEASE ?= $(shell uname -r)
+ARCH           ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
+DEB_ARCH       ?= $(shell dpkg --print-architecture)
+BUILD_DIR      ?= DX910-SW-99002-r8p0-01rel0/driver/src/devicedrv/mali
+KERNEL_SRC_DIR ?= /lib/modules/$(KERNEL_RELEASE)/build
+docdir          = debian/tmp/usr/share/doc/$(package)-$(KERNEL_RELEASE)
+make_option     = KDIR=$(KERNEL_SRC_DIR) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) BUILD=release MALI_PLATFORM=arm USING_DT=1 MALI_SHARED_INTERRUPTS=1 MALI_QUIET=1
+
+clean:
+	rm -f build
+	-$(MAKE) -C $(BUILD_DIR) $(make_option) clean
+	rm -rf debian/tmp debian/control debian/*~ debian/files* debian/substvars
+
+build:
+	$(MAKE) -C $(BUILD_DIR) $(make_option) all
+	touch build
+
+binary-indep: build
+
+control: debian/control.template
+	sed -e "s/\$${KERNEL_RELEASE}/${KERNEL_RELEASE}/g" debian/control.template > debian/control
+
+binary-arch: control build
+	rm -rf debian/tmp
+	install -d debian/tmp/DEBIAN $(docdir)
+	install -d debian/tmp/lib/modules/$(KERNEL_RELEASE)/kernel/drivers/gpu
+	cp -a $(BUILD_DIR)/mali.ko  debian/tmp/lib/modules/$(KERNEL_RELEASE)/kernel/drivers/gpu
+	cp -a debian/copyright      $(docdir)
+	cp -a debian/changelog      $(docdir)/changelog.Debian
+	cp -a ChangeLog             $(docdir)/changelog
+	cd $(docdir) && gzip -9 changelog changelog.Debian
+	dpkg-gencontrol -DArchitecture=$(DEB_ARCH)
+	cp -a debian/postinst       debian/tmp/DEBIAN
+	cp -a debian/prerm          debian/tmp/DEBIAN
+	cp -a debian/postrm         debian/tmp/DEBIAN
+	chown -R root:root debian/tmp
+	chmod -$ u+w,go=rX debian/tmp
+	dpkg-deb --build debian/tmp ..
+
+binary: binary-indep binary-arch
+

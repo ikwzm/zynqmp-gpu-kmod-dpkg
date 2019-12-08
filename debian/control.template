@@ -1,0 +1,14 @@
+Source: zynqmp-gpu
+Section: kmod
+Priority: optional
+Maintainer: ikwzm <ichiro_k@ca2.so-net.ne.jp>
+Build-Depends: debhelper (>= 9), bzip2
+Standards-Version: 3.9.6
+Homepage: <https://github.com/ikwzm/zynqmp-gpu-kmod-dpkg>
+
+Package: zynqmp-gpu-${KERNEL_RELEASE}
+Architecture: any
+Provides: zynqmp-gpu-kernel-module
+Depends: ${shlibs:Depends}, ${misc:Depends}, linux-image-${KERNEL_RELEASE}
+Description: zynqmp-gpu(ARM Mali-400 GPU) kernel module
+
