@@ -18,7 +18,7 @@ Build Debian Package
 ### Download this repository
 
 ```console
-shell$ git clone --recursive --depth=1 -b v0.1.0 git://github.com/ikwzm/zynqmp-gpu-kmod-dpkg
+shell$ git clone --recursive --depth=1 -b v0.1.1 git://github.com/ikwzm/zynqmp-gpu-kmod-dpkg
 shell$ cd zynqmp-gpu-kmod-dpkg
 ```
 
@@ -112,8 +112,8 @@ shell$ sudo debian/rules ARCH=arm64 DEB_ARCH=arm64 KERNEL_RELEASE=4.19.0-xlnx-v2
     :
     :
     :
-shell$ file ../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.0-0_arm64.deb 
-../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.0-0_arm64.deb: Debian binary package (format 2.0)
+shell$ file ../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.1-0_arm64.deb 
+../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.1-0_arm64.deb: Debian binary package (format 2.0)
 ```
 
 ### Self Compile
@@ -123,7 +123,7 @@ shell$ sudo debian/rules binary
     :
     :
     :
-shell$ file ../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.0-0_arm64.deb 
-../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.0-0_arm64.deb: Debian binary package (format 2.0)
+shell$ file ../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.1-0_arm64.deb 
+../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.1-0_arm64.deb: Debian binary package (format 2.0)
 ```
 
