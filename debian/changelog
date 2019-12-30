@@ -1,3 +1,9 @@
+zynqmp-gpu (0.1.2-0) unstable; urgency=low
+
+  * Change rmmod to modprobe --remove in prerm
+
+ -- ikwzm <ichiro_k@ca2.so-net.ne.jp>  Tue, 31 Dec 2019 01:00:00 +0900
+
 zynqmp-gpu (0.1.1-0) unstable; urgency=low
 
   * Add modprobe to postinst and rmmod to prerm
