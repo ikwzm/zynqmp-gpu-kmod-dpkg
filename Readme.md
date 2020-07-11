@@ -70,6 +70,23 @@ Receiving objects: 100% (11356/11356), 8.76 MiB | 6.08 MiB/s, done.
 Resolving deltas: 100% (6244/6244), done.
 ```
 
+```console
+shell$ git checkout 391c7054e88ae77abf18fe8a705ac7ff34c7dc79
+Note: checking out '391c7054e88ae77abf18fe8a705ac7ff34c7dc79'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at 391c705 meta-xilinx-contrib: Fix drm patch for v4.19 kernel
+```
+
+
 ### Patch to DX910-SW-99002-r8p0-01rel0
 
 ```console
