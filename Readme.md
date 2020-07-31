@@ -28,33 +28,34 @@ shell$ cd zynqmp-gpu-kmod-dpkg
 
 https://developer.arm.com/tools-and-software/graphics-and-gaming/mali-drivers/utgard-kernel/
 
-download DX910-SW-99002-r8p0-01rel0.tgz
+download DX910-SW-99002-r9p0-01rel0.tgz
 
 #### Download with wget
 
 ```console
-shell$ wget https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/DX910-SW-99002-r8p0-01rel0.tgz
---2019-12-08 13:55:32--  https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/DX910-SW-99002-r8p0-01rel0.tgz
-Resolving developer.arm.com (developer.arm.com)... 184.26.212.16
-Connecting to developer.arm.com (developer.arm.com)|184.26.212.16|:443... connected.
+shell$ wget https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/DX910-SW-99002-r9p0-01rel0.tgz
+--2020-07-31 10:03:37--  https://developer.arm.com/-/media/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/DX910-SW-99002-r9p0-01rel0.tgz
+Resolving developer.arm.com (developer.arm.com)... 23.42.64.246
+Connecting to developer.arm.com (developer.arm.com)|23.42.64.246|:443... connected.
 HTTP request sent, awaiting response... 302 Moved Temporarily
-Location: https://armkeil.blob.core.windows.net/developer/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/DX910-SW-99002-r8p0-01rel0.tgz [following]
---2019-12-08 13:55:33--  https://armkeil.blob.core.windows.net/developer/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/DX910-SW-99002-r8p0-01rel0.tgz
+Location: https://armkeil.blob.core.windows.net/developer/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/DX910-SW-99002-r9p0-01rel0.tgz [following]
+--2020-07-31 10:03:38--  https://armkeil.blob.core.windows.net/developer/Files/downloads/mali-drivers/kernel/mali-utgard-gpu/DX910-SW-99002-r9p0-01rel0.tgz
 Resolving armkeil.blob.core.windows.net (armkeil.blob.core.windows.net)... 52.239.137.100
 Connecting to armkeil.blob.core.windows.net (armkeil.blob.core.windows.net)|52.239.137.100|:443... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: 350213 (342K) [application/octet-stream]
-Saving to: ‘DX910-SW-99002-r8p0-01rel0.tgz’
+Length: 340063 (332K) [application/octet-stream]
+Saving to: ‘DX910-SW-99002-r9p0-01rel0.tgz’
 
-DX910-SW-99002-r8p0-01rel0 100%[========================================>] 342.00K   490KB/s    in 0.7s    
+DX910-SW-99002-r9p0-01rel0 100%[======================================>] 332.09K   486KB/s    in 0.7s    
 
-2019-12-08 13:55:35 (490 KB/s) - ‘DX910-SW-99002-r8p0-01rel0.tgz’ saved [350213/350213]
+2020-07-31 10:03:41 (486 KB/s) - ‘DX910-SW-99002-r9p0-01rel0.tgz’ saved [340063/340063]
+
 ```
 
-#### Extract DX910-SW-99002-r8p0-01rel0.tgz
+#### Extract DX910-SW-99002-r9p0-01rel0.tgz
 
 ```console
-shell$ tar xfz DX910-SW-99002-r8p0-01rel0.tgz 
+shell$ tar xfz DX910-SW-99002-r9p0-01rel0.tgz
 ```
 
 ### Download meta-xilinx
@@ -70,38 +71,16 @@ Receiving objects: 100% (11356/11356), 8.76 MiB | 6.08 MiB/s, done.
 Resolving deltas: 100% (6244/6244), done.
 ```
 
-```console
-shell$ git checkout 391c7054e88ae77abf18fe8a705ac7ff34c7dc79
-Note: checking out '391c7054e88ae77abf18fe8a705ac7ff34c7dc79'.
-
-You are in 'detached HEAD' state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
-
-  git checkout -b <new-branch-name>
-
-HEAD is now at 391c705 meta-xilinx-contrib: Fix drm patch for v4.19 kernel
-```
-
-
-### Patch to DX910-SW-99002-r8p0-01rel0
+### Patch to DX910-SW-99002-r9p0-01rel0
 
 ```console
-shell$ for file in `\find meta-xilinx/meta-xilinx-bsp/recipes-graphics/mali/kernel-module-mali -maxdepth 1 -type f | sort`; do patch -d DX910-SW-99002-r8p0-01rel0/driver/src/devicedrv/mali/ -p1 < $file ; done
+shell$ for file in `\find meta-xilinx/meta-xilinx-bsp/recipes-graphics/mali/kernel-module-mali -maxdepth 1 -type f | sort`; do patch -d DX910-SW-99002-r9p0-01rel0/driver/src/devicedrv/mali/ -p1 < $file ; done
 patching file Makefile
 patching file platform/arm/arm.c
 patching file linux/mali_linux_trace.h
 patching file platform/arm/arm.c
 patching file linux/mali_kernel_linux.c
 patching file platform/arm/arm.c
-patching file linux/mali_memory_os_alloc.c
-patching file linux/mali_osk_notification.c
-patching file linux/mali_internal_sync.c
-patching file linux/mali_internal_sync.h
-patching file linux/mali_memory_swap_alloc.c
 patching file common/mali_pm.c
 patching file linux/mali_kernel_linux.c
 patching file linux/mali_memory_os_alloc.c
@@ -110,6 +89,15 @@ patching file common/mali_control_timer.c
 patching file common/mali_group.c
 patching file common/mali_osk.h
 patching file linux/mali_osk_timers.c
+patching file linux/mali_memory_os_alloc.c
+Hunk #1 succeeded at 241 (offset 2 lines).
+patching file linux/mali_ukk_mem.c
+patching file linux/mali_memory_block_alloc.c
+patching file linux/mali_memory_cow.c
+patching file linux/mali_memory_os_alloc.c
+patching file linux/mali_memory_secure.c
+patching file linux/mali_memory.c
+patching file linux/mali_osk_time.c
 ```
 
 ### Cross Compile
@@ -125,12 +113,12 @@ patching file linux/mali_osk_timers.c
 
 
 ```console
-shell$ sudo debian/rules ARCH=arm64 DEB_ARCH=arm64 KERNEL_RELEASE=4.19.0-xlnx-v2019.1-zynqmp-fpga KERNEL_SRC_DIR=~/work/ZynqMP-FPGA-Linux/linux-xlnx-v2019.1-zynqmp-fpga binary
+shell$ sudo debian/rules ARCH=arm64 DEB_ARCH=arm64 KERNEL_RELEASE=5.4.0-xlnx-v2020.1-zynqmp-fpga KERNEL_SRC_DIR=~/work/ZynqMP-FPGA-Linux/linux-xlnx-v2020.1-zynqmp-fpga binary
     :
     :
     :
-shell$ file ../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.2-0_arm64.deb 
-../zynqmp-gpu-4.19.0-xlnx-v2019.1-zynqmp-fpga_0.1.2-0_arm64.deb: Debian binary package (format 2.0)
+shell$ file ../zynqmp-gpu-5.4.0-xlnx-v2020.1-zynqmp-fpga_0.1.2-0_arm64.deb 
+../zynqmp-gpu-5.4.0-xlnx-v2020.1-zynqmp-fpga_0.1.2-0_arm64.deb: Debian binary package (format 2.0)
 ```
 
 ### Self Compile
